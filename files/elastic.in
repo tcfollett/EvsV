@@ -1,0 +1,220 @@
+# ------------ Get variables from job script -------
+variable strfile  string ${strf}
+variable potfile  string ${potf}
+variable outfile  string ${outf}
+
+# ------------ Initialization ------------
+units           metal
+atom_style      atomic
+boundary        p p p
+
+read_data       ${strfile}
+
+pair_style      mlip_4 mlip_filename=${potfile}
+pair_coeff      * *
+
+# ------------ Initial minimization ------------
+fix             1 all box/relax iso 0.0
+min_style       cg
+minimize        1e-12 1e-12 10000 100000
+unfix           1
+
+thermo_style    custom step pe pxx pyy pzz pxy pxz pyz lx ly lz vol
+thermo          1
+run             0
+
+# ------------ Reference state ------------
+variable lx0    equal lx
+variable ly0    equal ly
+variable lz0    equal lz
+variable d      equal 0.002
+variable b      equal 1.0e-4
+
+# -----------------------------------------------------------------------
+# C11: strain xx, read pxx
+# -----------------------------------------------------------------------
+variable lxp equal ${lx0}*(1+${d})
+variable lxm equal ${lx0}*(1-${d})
+
+change_box all x final 0 ${lxp} remap units box
+run 0
+variable raw equal pxx
+variable sxx_p equal ${raw}
+
+change_box all x final 0 ${lxm} remap units box
+run 0
+variable raw equal pxx
+variable sxx_m equal ${raw}
+
+change_box all x final 0 ${lx0} remap units box
+variable C11 equal -(${sxx_p}-${sxx_m})/(2*${d})*${b}
+
+# -----------------------------------------------------------------------
+# C22: strain yy, read pyy
+# -----------------------------------------------------------------------
+variable lyp equal ${ly0}*(1+${d})
+variable lym equal ${ly0}*(1-${d})
+
+change_box all y final 0 ${lyp} remap units box
+run 0
+variable raw equal pyy
+variable syy_p equal ${raw}
+
+change_box all y final 0 ${lym} remap units box
+run 0
+variable raw equal pyy
+variable syy_m equal ${raw}
+
+change_box all y final 0 ${ly0} remap units box
+variable C22 equal -(${syy_p}-${syy_m})/(2*${d})*${b}
+
+# -----------------------------------------------------------------------
+# C33: strain zz, read pzz
+# -----------------------------------------------------------------------
+variable lz0    equal lz
+variable lzp equal ${lz0}*(1+${d})
+variable lzm equal ${lz0}*(1-${d})
+
+change_box all z final 0 ${lzp} remap units box
+run 0
+variable raw equal pzz
+variable szz_p equal ${raw}
+
+change_box all z final 0 ${lzm} remap units box
+run 0
+variable raw equal pzz
+variable szz_m equal ${raw}
+
+change_box all z final 0 ${lz0} remap units box
+variable C33 equal -(${szz_p}-${szz_m})/(2*${d})*${b}
+
+# -----------------------------------------------------------------------
+# C12: strain xx, read pyy
+# -----------------------------------------------------------------------
+change_box all x final 0 ${lxp} remap units box
+run 0
+variable raw equal pyy
+variable syy_xp equal ${raw}
+
+change_box all x final 0 ${lxm} remap units box
+run 0
+variable raw equal pyy
+variable syy_xm equal ${raw}
+
+change_box all x final 0 ${lx0} remap units box
+variable C12 equal -(${syy_xp}-${syy_xm})/(2*${d})*${b}
+
+# -----------------------------------------------------------------------
+# C13: strain xx, read pzz
+# -----------------------------------------------------------------------
+change_box all x final 0 ${lxp} remap units box
+run 0
+variable raw equal pzz
+variable szz_xp equal ${raw}
+
+change_box all x final 0 ${lxm} remap units box
+run 0
+variable raw equal pzz
+variable szz_xm equal ${raw}
+
+change_box all x final 0 ${lx0} remap units box
+variable C13 equal -(${szz_xp}-${szz_xm})/(2*${d})*${b}
+
+# -----------------------------------------------------------------------
+# C23: strain yy, read pzz
+# -----------------------------------------------------------------------
+change_box all y final 0 ${lyp} remap units box
+run 0
+variable raw equal pzz
+variable szz_yp equal ${raw}
+
+change_box all y final 0 ${lym} remap units box
+run 0
+variable raw equal pzz
+variable szz_ym equal ${raw}
+
+change_box all y final 0 ${ly0} remap units box
+variable C23 equal -(${szz_yp}-${szz_ym})/(2*${d})*${b}
+
+# -----------------------------------------------------------------------
+# C44: shear yz, read pyz
+# -----------------------------------------------------------------------
+variable yzp equal  ${d}*${lz0}
+variable yzm equal -${d}*${lz0}
+
+change_box all yz final ${yzp} remap units box
+run 0
+variable raw equal pyz
+variable syz_p equal ${raw}
+
+change_box all yz final ${yzm} remap units box
+run 0
+variable raw equal pyz
+variable syz_m equal ${raw}
+
+change_box all yz final 0.0 remap units box
+variable C44 equal -(${syz_p}-${syz_m})/(2*${d})*${b}*0.5
+
+# -----------------------------------------------------------------------
+# C55: shear xz, read pxz
+# -----------------------------------------------------------------------
+variable xzp equal  ${d}*${lz0}
+variable xzm equal -${d}*${lz0}
+
+change_box all xz final ${xzp} remap units box
+run 0
+variable raw equal pxz
+variable sxz_p equal ${raw}
+
+change_box all xz final ${xzm} remap units box
+run 0
+variable raw equal pxz
+variable sxz_m equal ${raw}
+
+change_box all xz final 0.0 remap units box
+variable C55 equal -(${sxz_p}-${sxz_m})/(2*${d})*${b}*0.5
+
+# -----------------------------------------------------------------------
+# C66: shear xy, read pxy
+# -----------------------------------------------------------------------
+variable xyp equal  ${d}*${ly0}
+variable xym equal -${d}*${ly0}
+
+change_box all xy final ${xyp} remap units box
+run 0
+variable raw equal pxy
+variable sxy_p equal ${raw}
+
+change_box all xy final ${xym} remap units box
+run 0
+variable raw equal pxy
+variable sxy_m equal ${raw}
+
+change_box all xy final 0.0 remap units box
+variable C66 equal -(${sxy_p}-${sxy_m})/(2*${d})*${b}*0.5
+
+# -----------------------------------------------------------------------
+# Voigt averages
+# -----------------------------------------------------------------------
+variable Kv equal (${C11}+${C22}+${C33}+2*(${C12}+${C13}+${C23}))/9
+variable Gv equal (${C11}+${C22}+${C33}-${C12}-${C13}-${C23}+3*(${C44}+${C55}+${C66}))/15
+
+# -----------------------------------------------------------------------
+# Output
+# -----------------------------------------------------------------------
+print "==========================================" file ${outfile}
+print " Elastic constants (GPa) - Fe3C MTP"      append ${outfile}
+print "==========================================" append ${outfile}
+print "C11 = ${C11}"                              append ${outfile}
+print "C22 = ${C22}"                              append ${outfile}
+print "C33 = ${C33}"                              append ${outfile}
+print "C12 = ${C12}"                              append ${outfile}
+print "C13 = ${C13}"                              append ${outfile}
+print "C23 = ${C23}"                              append ${outfile}
+print "C44 = ${C44}"                              append ${outfile}
+print "C55 = ${C55}"                              append ${outfile}
+print "C66 = ${C66}"                              append ${outfile}
+print "------------------------------------------" append ${outfile}
+print "K_Voigt = ${Kv} GPa"                      append ${outfile}
+print "G_Voigt = ${Gv} GPa"                      append ${outfile}
+print "==========================================" append ${outfile}

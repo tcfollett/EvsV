@@ -1,0 +1,39 @@
+#!/bin/bash
+#SBATCH --job-name=elastic_Fe3C
+#SBATCH --output=%x_%j.log
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=2
+#SBATCH --time=00:30:00
+#SBATCH --partition=cpu
+#SBATCH --mem=4Gb
+
+# ============================================================
+#  DEFINE ALL VARIABLES HERE — only edit this section
+# ============================================================
+LMP_EXE=/scratch/user/u.tf341997/MAT250003/shared_files/lmp_mpi_icx
+NPROC=2
+
+STRUCTURE=Fe3C_mp-510623_222_fixed_min.data
+POTENTIAL=FeC_RAND_5_03-754_rb8_L16_cut5d8.json
+
+PREFIX=$(basename "${STRUCTURE}" .data)
+OUT=${PREFIX}_elastic.out
+LOG=${PREFIX}_elastic.log
+# ============================================================
+
+module purge
+module load intel-compilers/2025.1.1
+module load impi/2021.15.0
+module load imkl/2025.1.0
+
+echo "Computing elastic constants for ${STRUCTURE}..."
+
+mpirun -np ${NPROC} ${LMP_EXE} \
+    -in  elastic.in \
+    -var potf  "${POTENTIAL}" \
+    -var strf  "${STRUCTURE}" \
+    -var outf  "${OUT}" \
+    -log ${LOG}
+
+echo "Done. Results in ${OUT}"
+cat ${OUT}

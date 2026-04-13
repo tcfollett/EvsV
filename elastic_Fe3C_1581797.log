@@ -1,0 +1,899 @@
+Computing elastic constants for Fe3C_mp-510623_222_fixed_min.data...
+LAMMPS (22 Jul 2025 - Update 3)
+Reading data file ...
+  triclinic box = (0.091740163 0.11693886 0.080843858) to (10.16862 12.961681 8.9608565) with tilt (0 0 0)
+  1 by 2 by 1 MPI processor grid
+  reading atoms ...
+  128 atoms
+  reading velocities ...
+  128 velocities
+  read_data CPU = 0.059 seconds
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+CfgCalculator not loaded. Attempting to load a potential
+Neighbor list info ...
+  update: every = 1 steps, delay = 0 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7.8
+  ghost atom cutoff = 7.8
+  binsize = 3.9, bins = 3 4 3
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair mlip_4, perpetual
+      attributes: full, newton on
+      pair build: full/bin/atomonly
+      stencil: full/bin/3d
+      bin: standard
+Setting up cg style minimization ...
+  Unit style    : metal
+  Current step  : 0
+WARNING: Energy due to 1 extra global DOFs will be included in minimizer energies
+ (../min.cpp:222)
+Per MPI rank memory allocation (min/avg/max) = 4.251 | 4.251 | 4.251 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press          Volume    
+         0   0             -1096.5464      0             -1096.5464      3.6485508      1149.3837    
+        17   0             -1096.5464      0             -1096.5464      1.5471888      1149.4064    
+Loop time of 0.551559 on 2 procs for 17 steps with 128 atoms
+
+99.3% CPU use with 2 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = energy tolerance
+  Energy initial, next-to-last, final = 
+     -1096.54640865738  -1096.54642064024  -1096.54642064085
+  Force two-norm initial, final = 0.018596192 0.0033679883
+  Force max component initial, final = 0.0078522901 0.0033298522
+  Final line search alpha, max atom move = 1 0.0033298522
+  Iterations, force evaluations = 17 34
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.54652    | 0.54756    | 0.54861    |   0.1 | 99.28
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.0013242  | 0.0023582  | 0.0033921  |   2.1 |  0.43
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.001637   |            |       |  0.30
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        13760 ave       13760 max       13760 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 27520
+Ave neighs/atom = 215
+Neighbor list builds = 0
+Dangerous builds = 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+CfgCalculator not loaded. Attempting to load a potential
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 17
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5464     -13847.325      50600.656     -36748.689     -2.1390589e-06  9.4421309e-06 -7.6371997e-11  10.076946      12.844827      8.880071       1149.4064    
+Loop time of 1.9255e-06 on 2 procs for 0 steps with 128 atoms
+
+155.8% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.925e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        13760 ave       13760 max       13760 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 27520
+Ave neighs/atom = 215
+Neighbor list builds = 0
+Dangerous builds = 0
+Changing box ...
+  triclinic box = (0 0.11689668 0.080814699) to (10.0971 12.961723 8.9608857) with tilt (0 0 0)
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+CfgCalculator not loaded. Attempting to load a potential
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 17
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5197     -23416.792      46160.056     -40873.617     -2.1413526e-06  9.4382938e-06 -5.7145363e-12  10.0971        12.844827      8.880071       1151.7052    
+Loop time of 1.252e-06 on 2 procs for 0 steps with 128 atoms
+
+159.7% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.252e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1366 ave        1366 max        1366 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        13760 ave       13760 max       13760 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 27520
+Ave neighs/atom = 215
+Neighbor list builds = 0
+Dangerous builds = 0
+Changing box ...
+  triclinic box = (0 0.11689668 0.080814699) to (10.056792 12.961723 8.9608857) with tilt (0 0 0)
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+CfgCalculator not loaded. Attempting to load a potential
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 17
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5593     -4073.8376      55095.637     -32584.409     -2.1424746e-06  9.4408265e-06  1.1335321e-10  10.056792      12.844827      8.880071       1147.1076    
+Loop time of 1.25e-06 on 2 procs for 0 steps with 128 atoms
+
+160.0% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.25e-06   |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        13760 ave       13760 max       13760 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 27520
+Ave neighs/atom = 215
+Neighbor list builds = 0
+Dangerous builds = 0
+Changing box ...
+  triclinic box = (0 0.11689668 0.080814699) to (10.056792 12.961723 8.9608857) with tilt (0 0 0)
+Changing box ...
+  triclinic box = (0 0 0.080814699) to (10.056792 12.870516 8.9608857) with tilt (0 0 0)
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+CfgCalculator not loaded. Attempting to load a potential
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 17
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.6307     -8450.6854      44626.29      -36070.313     -2.1701992e-06  8.8300814e-06 -7.7378219e-12  10.056792      12.870516      8.880071       1149.4018    
+Loop time of 1.46e-06 on 2 procs for 0 steps with 128 atoms
+
+137.0% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.46e-06   |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        13760 ave       13760 max       13760 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 27520
+Ave neighs/atom = 215
+Neighbor list builds = 0
+Dangerous builds = 0
+Changing box ...
+  triclinic box = (0 0 0.080814699) to (10.056792 12.819137 8.9608857) with tilt (0 0 0)
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+CfgCalculator not loaded. Attempting to load a potential
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 17
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.473       341.42749      65418.248     -29104.584     -2.1141806e-06  1.006019e-05   8.8875475e-11  10.056792      12.819137      8.880071       1144.8133    
+Loop time of 1.6995e-06 on 2 procs for 0 steps with 128 atoms
+
+147.1% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.7e-06    |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14016 ave       14016 max       14016 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28032
+Ave neighs/atom = 219
+Neighbor list builds = 0
+Dangerous builds = 0
+Changing box ...
+  triclinic box = (0 0 0.080814699) to (10.056792 12.819137 8.9608857) with tilt (0 0 0)
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8978311) with tilt (0 0 0)
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+CfgCalculator not loaded. Attempting to load a potential
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 17
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.4257     -3925.8507      61778.633     -37072.127     -2.1575985e-06  9.944177e-06  -2.0856454e-11  10.056792      12.819137      8.8978311      1147.103     
+Loop time of 1.3275e-06 on 2 procs for 0 steps with 128 atoms
+
+188.3% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.327e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        13696 ave       13696 max       13696 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 27392
+Ave neighs/atom = 214
+Neighbor list builds = 0
+Dangerous builds = 0
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+CfgCalculator not loaded. Attempting to load a potential
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 17
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5089      4583.314       69085.254     -21128.246     -2.741957e-06   1.3179682e-05 -3.5808259e-12  10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.353e-06 on 2 procs for 0 steps with 128 atoms
+
+147.8% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.353e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14016 ave       14016 max       14016 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28032
+Ave neighs/atom = 219
+Neighbor list builds = 0
+Dangerous builds = 0
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+Changing box ...
+  triclinic box = (0 0 0) to (10.0971 12.819137 8.8623108) with tilt (0 0 0)
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+CfgCalculator not loaded. Attempting to load a potential
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 17
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.4939     -14945.862      60018.73      -29444.06      -2.0747557e-06  1.0271414e-05 -1.0932193e-11  10.0971        12.819137      8.8623108      1147.103     
+Loop time of 1.211e-06 on 2 procs for 0 steps with 128 atoms
+
+165.2% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.211e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1366 ave        1366 max        1366 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14016 ave       14016 max       14016 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28032
+Ave neighs/atom = 219
+Neighbor list builds = 0
+Dangerous builds = 0
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+CfgCalculator not loaded. Attempting to load a potential
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 17
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5089      4583.314       69085.254     -21128.246     -2.7420327e-06  1.3179793e-05 -2.0784359e-11  10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.2365e-06 on 2 procs for 0 steps with 128 atoms
+
+161.7% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.237e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14016 ave       14016 max       14016 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28032
+Ave neighs/atom = 219
+Neighbor list builds = 0
+Dangerous builds = 0
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+Changing box ...
+  triclinic box = (0 0 0) to (10.0971 12.819137 8.8623108) with tilt (0 0 0)
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+CfgCalculator not loaded. Attempting to load a potential
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 17
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.4939     -14945.862      60018.73      -29444.06      -2.07464e-06    1.0271487e-05 -1.0474747e-10  10.0971        12.819137      8.8623108      1147.103     
+Loop time of 1.3235e-06 on 2 procs for 0 steps with 128 atoms
+
+151.1% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.323e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1366 ave        1366 max        1366 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14016 ave       14016 max       14016 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28032
+Ave neighs/atom = 219
+Neighbor list builds = 0
+Dangerous builds = 0
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+CfgCalculator not loaded. Attempting to load a potential
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 17
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5089      4583.314       69085.254     -21128.246     -2.7419357e-06  1.3179829e-05  1.0119725e-11  10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.844e-06 on 2 procs for 0 steps with 128 atoms
+
+216.9% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.844e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14016 ave       14016 max       14016 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28032
+Ave neighs/atom = 219
+Neighbor list builds = 0
+Dangerous builds = 0
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.870516 8.8623108) with tilt (0 0 0)
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+CfgCalculator not loaded. Attempting to load a potential
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 17
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.6768     -4249.1858      48299.043     -28148.359     -2.1317557e-06  9.0142741e-06  2.713665e-11   10.056792      12.870516      8.8623108      1147.103     
+Loop time of 1.466e-06 on 2 procs for 0 steps with 128 atoms
+
+170.5% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.466e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        13760 ave       13760 max       13760 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 27520
+Ave neighs/atom = 215
+Neighbor list builds = 0
+Dangerous builds = 0
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+CfgCalculator not loaded. Attempting to load a potential
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 17
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5089      4583.314       69085.254     -21128.246     -2.7419664e-06  1.3179738e-05 -2.0862203e-11  10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.3965e-06 on 2 procs for 0 steps with 128 atoms
+
+179.0% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.396e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14016 ave       14016 max       14016 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28032
+Ave neighs/atom = 219
+Neighbor list builds = 0
+Dangerous builds = 0
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0.017724622)
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+CfgCalculator not loaded. Attempting to load a potential
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 17
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5072      4533.0087      69040.482     -21135.948     -4.9991586e-06  1.1880872e-05 -2399.3311      10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.4665e-06 on 2 procs for 0 steps with 128 atoms
+
+204.6% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.467e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14048 ave       14048 max       14048 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28096
+Ave neighs/atom = 219.5
+Neighbor list builds = 0
+Dangerous builds = 0
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 -0.017724622)
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+CfgCalculator not loaded. Attempting to load a potential
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 17
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5072      4533.0087      69040.482     -21135.948      1.7082579e-07  1.1500011e-05  2399.3311      10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.5925e-06 on 2 procs for 0 steps with 128 atoms
+
+188.4% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.592e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14048 ave       14048 max       14048 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28096
+Ave neighs/atom = 219.5
+Neighbor list builds = 0
+Dangerous builds = 0
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0.017724622 0)
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+CfgCalculator not loaded. Attempting to load a potential
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 17
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5069      4508.1294      69047.414     -21157.527     -2.4165355e-06 -2752.748       1.3207285e-07  10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.5135e-06 on 2 procs for 0 steps with 128 atoms
+
+198.2% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.513e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14016 ave       14016 max       14016 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28032
+Ave neighs/atom = 219
+Neighbor list builds = 0
+Dangerous builds = 0
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 -0.017724622 0)
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+CfgCalculator not loaded. Attempting to load a potential
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 17
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5069      4508.1294      69047.414     -21157.527     -2.4164788e-06  2752.748      -1.3175727e-07  10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.704e-06 on 2 procs for 0 steps with 128 atoms
+
+205.4% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.704e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14016 ave       14016 max       14016 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28032
+Ave neighs/atom = 219
+Neighbor list builds = 0
+Dangerous builds = 0
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0.025638274 0 0)
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+CfgCalculator not loaded. Attempting to load a potential
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 17
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5067      4481.4751      69029.467     -21155.349     -3114.4888      1.1647085e-05 -1.584319e-06   10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.425e-06 on 2 procs for 0 steps with 128 atoms
+
+210.5% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.425e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14048 ave       14048 max       14048 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28096
+Ave neighs/atom = 219.5
+Neighbor list builds = 0
+Dangerous builds = 0
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (-0.025638274 0 0)
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+CfgCalculator not loaded. Attempting to load a potential
+Extrapolation control is off
+CfgCalculator not loaded. Attempting to load a potential
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 17
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5067      4481.4751      69029.467     -21155.349      3114.4888      1.1647215e-05  1.5845804e-06  10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.291e-06 on 2 procs for 0 steps with 128 atoms
+
+193.6% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.291e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14048 ave       14048 max       14048 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28096
+Ave neighs/atom = 219.5
+Neighbor list builds = 0
+Dangerous builds = 0
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+==========================================
+ Elastic constants (GPa) - Fe3C MTP
+==========================================
+C11 = 483.573854493943
+C22 = 519.7989444638
+C33 = 398.597021225705
+C12 = 226.663113116158
+C13 = 207.895351803293
+C23 = 175.502833995532
+C44 = 59.9832784920708
+C55 = 68.8186996227989
+C66 = 77.8622199319744
+------------------------------------------
+K_Voigt = 291.34360200149 GPa
+G_Voigt = 94.1267410272665 GPa
+==========================================
+Total wall time: 0:00:03
+Done. Results in Fe3C_mp-510623_222_fixed_min_elastic.out
+==========================================
+ Elastic constants (GPa) - Fe3C MTP
+==========================================
+C11 = 483.573854493943
+C22 = 519.7989444638
+C33 = 398.597021225705
+C12 = 226.663113116158
+C13 = 207.895351803293
+C23 = 175.502833995532
+C44 = 59.9832784920708
+C55 = 68.8186996227989
+C66 = 77.8622199319744
+------------------------------------------
+K_Voigt = 291.34360200149 GPa
+G_Voigt = 94.1267410272665 GPa
+==========================================

@@ -1,0 +1,60 @@
+#!/bin/bash
+#SBATCH --job-name=mlip_test
+#SBATCH --output=%x_%j.log
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=2
+#SBATCH --time=05:30:00
+#SBATCH --partition=cpu
+#SBATCH --mem=4Gb
+
+# ============================================================
+#  DEFINE ALL VARIABLES HERE — only edit this section
+# ============================================================
+LMP_EXE=/scratch/user/u.ns213847/MAT250003/shared_files/lmp_mpi_icx
+NPROC=2
+
+STRUCTURE=Fe3C_mp-510623_222_fixed.data          # input structure
+POTENTIAL=FeC_RAND_5_03-754_rb8_L16_cut5d8.json
+
+# Derived names — built from STRUCTURE prefix, no need to edit
+PREFIX=$(basename "${STRUCTURE}" .data)    # Fe3C_mp-510623_222
+MIN_STRUCTURE=${PREFIX}_min.data           # minimized output structure
+EQ_OUT=${PREFIX}_EvsV.out                  # equilibrium dims + EvsV data
+MIN_LOG=min_${PREFIX}.log
+EVSV_LOG=evsv_${PREFIX}.log
+# ============================================================
+
+module purge
+module load intel-compilers/2025.1.1
+module load impi/2021.15.0
+module load imkl/2025.1.0
+
+echo "Step 1: Minimization to find equilibrium..."
+
+mpirun -np ${NPROC} ${LMP_EXE} \
+    -in  minimize.in \
+    -var potf  "${POTENTIAL}" \
+    -var strf  "${STRUCTURE}" \
+    -var outf  "${EQ_OUT}" \
+    -var mstrf "${MIN_STRUCTURE}" \
+    -log ${MIN_LOG}
+
+echo "Extracting equilibrium values..."
+
+read lx0 ly0 lz0 < "${EQ_OUT}"
+
+echo "lx0=$lx0"
+echo "ly0=$ly0"
+echo "lz0=$lz0"
+
+echo "Step 2: Volume scaling using extracted values..."
+
+mpirun -np ${NPROC} ${LMP_EXE} \
+    -in  EvsV.in \
+    -var potf  "${POTENTIAL}" \
+    -var strf  "${MIN_STRUCTURE}" \
+    -var outf  "${EQ_OUT}" \
+    -var xlen  "$lx0" \
+    -var ylen  "$ly0" \
+    -var zlen  "$lz0" \
+    -log ${EVSV_LOG}

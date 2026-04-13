@@ -1,0 +1,57 @@
+# ------------ Get data from prompt-------
+variable strfile string ${strf}
+variable potfile string ${potf}
+variable outfile string ${outf}
+variable lx0     string ${xlen}
+variable ly0     string ${ylen}
+variable lz0     string ${zlen}
+
+# ------------ Initialization ------------
+units           metal
+atom_style      atomic
+boundary        p p p
+
+read_data       ${strfile}
+
+pair_style      mlip_4 mlip_filename=${potfile}
+pair_coeff      * *
+
+print "Equilibrium dims: ${lx0} ${ly0} ${lz0}" file ${outfile}
+print "" append ${outfile}
+print "volume_scale      volume_per_atom      energy_per_atom"  append ${outfile}
+
+# set up volumetric scan
+variable nsteps    equal 21
+variable volstep   equal 0
+variable low_vol   equal 0.9
+variable high_vol  equal 1.1
+variable natoms equal count(all)
+
+label loop_vol
+    # interpolate scale factor between low_vol and upper_vol
+    variable scale equal ${low_vol}+(${volstep}/(${nsteps}-1))*(${high_vol}-${low_vol})
+    variable slen  equal ${scale}^(1.0/3.0)
+
+    # compute new box lengths
+    variable nxlen equal ${lx0}*${slen}
+    variable nylen equal ${ly0}*${slen}
+    variable nzlen equal ${lz0}*${slen}
+
+    change_box all x final 0 ${nxlen} y final 0 ${nylen} z final 0 ${nzlen} remap
+
+    run 0
+
+    # total volume and potential energy
+    variable cur_vol   equal vol
+    variable cur_pe    equal pe
+
+    # per-atom volume and energy
+    variable vol_pa    equal ${cur_vol}/${natoms}
+    variable pe_pa     equal ${cur_pe}/${natoms}
+
+    # write scale, vol/atom, pe/atom
+    print "${scale} ${vol_pa} ${pe_pa}" append ${outfile}
+
+    # increment and loop
+    variable volstep equal ${volstep}+1
+    if "${volstep} < ${nsteps}" then "jump SELF loop_vol"

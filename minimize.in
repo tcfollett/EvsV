@@ -1,0 +1,33 @@
+# ------------ Get data from prompt -------
+variable strfile  string ${strf}
+variable potfile  string ${potf}
+variable outfile  string ${outf}
+variable minfile  string ${mstrf}
+
+# ------------ Initialization ------------
+units           metal
+atom_style      atomic
+boundary        p p p
+
+read_data       ${strfile}
+
+pair_style      mlip_4 mlip_filename=${potfile}
+pair_coeff      * *
+
+compute         eng all pe/atom
+
+fix             1 all box/relax iso 0.0
+thermo_style    custom step pe lx ly lz vol press
+thermo          1
+min_style       cg
+minimize        1e-10 1e-10 10000 20000
+unfix           1
+run             0
+
+variable lx0 equal lx
+variable ly0 equal ly
+variable lz0 equal lz
+
+print "${lx0} ${ly0} ${lz0}" file ${outfile}
+
+write_data ${minfile} nocoeff

@@ -1,0 +1,1120 @@
+LAMMPS (22 Jul 2025 - Update 3)
+# ------------ Get variables from job script -------
+variable strfile  string ${strf}
+variable strfile  string Fe3C_mp-510623_222_fixed_min.data
+variable potfile  string ${potf}
+variable potfile  string FeC_RAND_5_03-754_rb8_L16_cut5d8.json
+variable outfile  string ${outf}
+variable outfile  string Fe3C_mp-510623_222_fixed_min_elastic.out
+
+# ------------ Initialization ------------
+units           metal
+atom_style      atomic
+boundary        p p p
+
+read_data       ${strfile}
+read_data       Fe3C_mp-510623_222_fixed_min.data
+Reading data file ...
+  triclinic box = (0.091740163 0.11693886 0.080843858) to (10.16862 12.961681 8.9608565) with tilt (0 0 0)
+  1 by 2 by 1 MPI processor grid
+  reading atoms ...
+  128 atoms
+  reading velocities ...
+  128 velocities
+  read_data CPU = 0.059 seconds
+
+pair_style      mlip_4 mlip_filename=${potfile}
+pair_style      mlip_4 mlip_filename=FeC_RAND_5_03-754_rb8_L16_cut5d8.json
+pair_coeff      * *
+
+# ------------ Initial minimization ------------
+fix             1 all box/relax iso 0.0
+min_style       cg
+minimize        1e-12 1e-12 10000 100000
+Extrapolation control is off
+Neighbor list info ...
+  update: every = 1 steps, delay = 0 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7.8
+  ghost atom cutoff = 7.8
+  binsize = 3.9, bins = 3 4 3
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair mlip_4, perpetual
+      attributes: full, newton on
+      pair build: full/bin/atomonly
+      stencil: full/bin/3d
+      bin: standard
+WARNING: Energy due to 1 extra global DOFs will be included in minimizer energies
+ (../min.cpp:222)
+Per MPI rank memory allocation (min/avg/max) = 4.251 | 4.251 | 4.251 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press          Volume    
+         0   0             -1096.5464      0             -1096.5464      3.6485508      1149.3837    
+        17   0             -1096.5464      0             -1096.5464      1.5471888      1149.4064    
+Loop time of 0.551559 on 2 procs for 17 steps with 128 atoms
+
+99.3% CPU use with 2 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = energy tolerance
+  Energy initial, next-to-last, final = 
+     -1096.54640865738  -1096.54642064024  -1096.54642064085
+  Force two-norm initial, final = 0.018596192 0.0033679883
+  Force max component initial, final = 0.0078522901 0.0033298522
+  Final line search alpha, max atom move = 1 0.0033298522
+  Iterations, force evaluations = 17 34
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.54652    | 0.54756    | 0.54861    |   0.1 | 99.28
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.0013242  | 0.0023582  | 0.0033921  |   2.1 |  0.43
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.001637   |            |       |  0.30
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        13760 ave       13760 max       13760 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 27520
+Ave neighs/atom = 215
+Neighbor list builds = 0
+Dangerous builds = 0
+unfix           1
+
+thermo_style    custom step pe pxx pyy pzz pxy pxz pyz lx ly lz vol
+thermo          1
+run             0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+Extrapolation control is off
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5464     -13847.325      50600.656     -36748.689     -2.1390589e-06  9.4421309e-06 -7.6371997e-11  10.076946      12.844827      8.880071       1149.4064    
+Loop time of 1.9255e-06 on 2 procs for 0 steps with 128 atoms
+
+155.8% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.925e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        13760 ave       13760 max       13760 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 27520
+Ave neighs/atom = 215
+Neighbor list builds = 0
+Dangerous builds = 0
+
+# ------------ Reference state ------------
+variable lx0    equal lx
+variable ly0    equal ly
+variable lz0    equal lz
+variable d      equal 0.002
+variable b      equal 1.0e-4
+
+# -----------------------------------------------------------------------
+# C11: strain xx, read pxx
+# -----------------------------------------------------------------------
+variable lxp equal ${lx0}*(1+${d})
+variable lxp equal 10.076945615087*(1+${d})
+variable lxp equal 10.076945615087*(1+0.002)
+variable lxm equal ${lx0}*(1-${d})
+variable lxm equal 10.076945615087*(1-${d})
+variable lxm equal 10.076945615087*(1-0.002)
+
+change_box all x final 0 ${lxp} remap units box
+change_box all x final 0 10.0970995063172 remap units box
+Changing box ...
+  triclinic box = (0 0.11689668 0.080814699) to (10.0971 12.961723 8.9608857) with tilt (0 0 0)
+run 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+Extrapolation control is off
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5197     -23416.792      46160.056     -40873.617     -2.1413526e-06  9.4382938e-06 -5.7145363e-12  10.0971        12.844827      8.880071       1151.7052    
+Loop time of 1.252e-06 on 2 procs for 0 steps with 128 atoms
+
+159.7% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.252e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1366 ave        1366 max        1366 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        13760 ave       13760 max       13760 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 27520
+Ave neighs/atom = 215
+Neighbor list builds = 0
+Dangerous builds = 0
+variable raw equal pxx
+variable sxx_p equal ${raw}
+variable sxx_p equal -23416.791759916
+
+change_box all x final 0 ${lxm} remap units box
+change_box all x final 0 10.0567917238568 remap units box
+Changing box ...
+  triclinic box = (0 0.11689668 0.080814699) to (10.056792 12.961723 8.9608857) with tilt (0 0 0)
+run 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+Extrapolation control is off
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5593     -4073.8376      55095.637     -32584.409     -2.1424746e-06  9.4408265e-06  1.1335321e-10  10.056792      12.844827      8.880071       1147.1076    
+Loop time of 1.25e-06 on 2 procs for 0 steps with 128 atoms
+
+160.0% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.25e-06   |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        13760 ave       13760 max       13760 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 27520
+Ave neighs/atom = 215
+Neighbor list builds = 0
+Dangerous builds = 0
+variable raw equal pxx
+variable sxx_m equal ${raw}
+variable sxx_m equal -4073.83758015827
+
+change_box all x final 0 ${lx0} remap units box
+change_box all x final 0 10.0567917238568 remap units box
+Changing box ...
+  triclinic box = (0 0.11689668 0.080814699) to (10.056792 12.961723 8.9608857) with tilt (0 0 0)
+variable C11 equal -(${sxx_p}-${sxx_m})/(2*${d})*${b}
+variable C11 equal -(-23416.791759916-${sxx_m})/(2*${d})*${b}
+variable C11 equal -(-23416.791759916--4073.83758015827)/(2*${d})*${b}
+variable C11 equal -(-23416.791759916--4073.83758015827)/(2*0.002)*${b}
+variable C11 equal -(-23416.791759916--4073.83758015827)/(2*0.002)*0.0001
+
+# -----------------------------------------------------------------------
+# C22: strain yy, read pyy
+# -----------------------------------------------------------------------
+variable lyp equal ${ly0}*(1+${d})
+variable lyp equal 12.8448266003508*(1+${d})
+variable lyp equal 12.8448266003508*(1+0.002)
+variable lym equal ${ly0}*(1-${d})
+variable lym equal 12.8448266003508*(1-${d})
+variable lym equal 12.8448266003508*(1-0.002)
+
+change_box all y final 0 ${lyp} remap units box
+change_box all y final 0 12.8705162535515 remap units box
+Changing box ...
+  triclinic box = (0 0 0.080814699) to (10.056792 12.870516 8.9608857) with tilt (0 0 0)
+run 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+Extrapolation control is off
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.6307     -8450.6854      44626.29      -36070.313     -2.1701992e-06  8.8300814e-06 -7.7378219e-12  10.056792      12.870516      8.880071       1149.4018    
+Loop time of 1.46e-06 on 2 procs for 0 steps with 128 atoms
+
+137.0% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.46e-06   |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        13760 ave       13760 max       13760 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 27520
+Ave neighs/atom = 215
+Neighbor list builds = 0
+Dangerous builds = 0
+variable raw equal pyy
+variable syy_p equal ${raw}
+variable syy_p equal 44626.290008025
+
+change_box all y final 0 ${lym} remap units box
+change_box all y final 0 12.8191369471501 remap units box
+Changing box ...
+  triclinic box = (0 0 0.080814699) to (10.056792 12.819137 8.9608857) with tilt (0 0 0)
+run 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+Extrapolation control is off
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.473       341.42749      65418.248     -29104.584     -2.1141806e-06  1.006019e-05   8.8875475e-11  10.056792      12.819137      8.880071       1144.8133    
+Loop time of 1.6995e-06 on 2 procs for 0 steps with 128 atoms
+
+147.1% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.7e-06    |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14016 ave       14016 max       14016 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28032
+Ave neighs/atom = 219
+Neighbor list builds = 0
+Dangerous builds = 0
+variable raw equal pyy
+variable syy_m equal ${raw}
+variable syy_m equal 65418.247786577
+
+change_box all y final 0 ${ly0} remap units box
+change_box all y final 0 12.8191369471501 remap units box
+Changing box ...
+  triclinic box = (0 0 0.080814699) to (10.056792 12.819137 8.9608857) with tilt (0 0 0)
+variable C22 equal -(${syy_p}-${syy_m})/(2*${d})*${b}
+variable C22 equal -(44626.290008025-${syy_m})/(2*${d})*${b}
+variable C22 equal -(44626.290008025-65418.247786577)/(2*${d})*${b}
+variable C22 equal -(44626.290008025-65418.247786577)/(2*0.002)*${b}
+variable C22 equal -(44626.290008025-65418.247786577)/(2*0.002)*0.0001
+
+# -----------------------------------------------------------------------
+# C33: strain zz, read pzz
+# -----------------------------------------------------------------------
+variable lz0    equal lz
+variable lzp equal ${lz0}*(1+${d})
+variable lzp equal 8.88007096463337*(1+${d})
+variable lzp equal 8.88007096463337*(1+0.002)
+variable lzm equal ${lz0}*(1-${d})
+variable lzm equal 8.88007096463337*(1-${d})
+variable lzm equal 8.88007096463337*(1-0.002)
+
+change_box all z final 0 ${lzp} remap units box
+change_box all z final 0 8.89783110656264 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8978311) with tilt (0 0 0)
+run 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+Extrapolation control is off
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.4257     -3925.8507      61778.633     -37072.127     -2.1575985e-06  9.944177e-06  -2.0856454e-11  10.056792      12.819137      8.8978311      1147.103     
+Loop time of 1.3275e-06 on 2 procs for 0 steps with 128 atoms
+
+188.3% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.327e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        13696 ave       13696 max       13696 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 27392
+Ave neighs/atom = 214
+Neighbor list builds = 0
+Dangerous builds = 0
+variable raw equal pzz
+variable szz_p equal ${raw}
+variable szz_p equal -37072.1267618558
+
+change_box all z final 0 ${lzm} remap units box
+change_box all z final 0 8.8623108227041 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+run 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+Extrapolation control is off
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5089      4583.314       69085.254     -21128.246     -2.741957e-06   1.3179682e-05 -3.5808259e-12  10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.353e-06 on 2 procs for 0 steps with 128 atoms
+
+147.8% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.353e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14016 ave       14016 max       14016 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28032
+Ave neighs/atom = 219
+Neighbor list builds = 0
+Dangerous builds = 0
+variable raw equal pzz
+variable szz_m equal ${raw}
+variable szz_m equal -21128.2459128276
+
+change_box all z final 0 ${lz0} remap units box
+change_box all z final 0 8.8623108227041 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+variable C33 equal -(${szz_p}-${szz_m})/(2*${d})*${b}
+variable C33 equal -(-37072.1267618558-${szz_m})/(2*${d})*${b}
+variable C33 equal -(-37072.1267618558--21128.2459128276)/(2*${d})*${b}
+variable C33 equal -(-37072.1267618558--21128.2459128276)/(2*0.002)*${b}
+variable C33 equal -(-37072.1267618558--21128.2459128276)/(2*0.002)*0.0001
+
+# -----------------------------------------------------------------------
+# C12: strain xx, read pyy
+# -----------------------------------------------------------------------
+change_box all x final 0 ${lxp} remap units box
+change_box all x final 0 10.0970995063172 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.0971 12.819137 8.8623108) with tilt (0 0 0)
+run 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+Extrapolation control is off
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.4939     -14945.862      60018.73      -29444.06      -2.0747557e-06  1.0271414e-05 -1.0932193e-11  10.0971        12.819137      8.8623108      1147.103     
+Loop time of 1.211e-06 on 2 procs for 0 steps with 128 atoms
+
+165.2% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.211e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1366 ave        1366 max        1366 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14016 ave       14016 max       14016 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28032
+Ave neighs/atom = 219
+Neighbor list builds = 0
+Dangerous builds = 0
+variable raw equal pyy
+variable syy_xp equal ${raw}
+variable syy_xp equal 60018.7298066746
+
+change_box all x final 0 ${lxm} remap units box
+change_box all x final 0 10.0567917238568 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+run 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+Extrapolation control is off
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5089      4583.314       69085.254     -21128.246     -2.7420327e-06  1.3179793e-05 -2.0784359e-11  10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.2365e-06 on 2 procs for 0 steps with 128 atoms
+
+161.7% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.237e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14016 ave       14016 max       14016 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28032
+Ave neighs/atom = 219
+Neighbor list builds = 0
+Dangerous builds = 0
+variable raw equal pyy
+variable syy_xm equal ${raw}
+variable syy_xm equal 69085.2543313209
+
+change_box all x final 0 ${lx0} remap units box
+change_box all x final 0 10.0567917238568 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+variable C12 equal -(${syy_xp}-${syy_xm})/(2*${d})*${b}
+variable C12 equal -(60018.7298066746-${syy_xm})/(2*${d})*${b}
+variable C12 equal -(60018.7298066746-69085.2543313209)/(2*${d})*${b}
+variable C12 equal -(60018.7298066746-69085.2543313209)/(2*0.002)*${b}
+variable C12 equal -(60018.7298066746-69085.2543313209)/(2*0.002)*0.0001
+
+# -----------------------------------------------------------------------
+# C13: strain xx, read pzz
+# -----------------------------------------------------------------------
+change_box all x final 0 ${lxp} remap units box
+change_box all x final 0 10.0970995063172 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.0971 12.819137 8.8623108) with tilt (0 0 0)
+run 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+Extrapolation control is off
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.4939     -14945.862      60018.73      -29444.06      -2.07464e-06    1.0271487e-05 -1.0474747e-10  10.0971        12.819137      8.8623108      1147.103     
+Loop time of 1.3235e-06 on 2 procs for 0 steps with 128 atoms
+
+151.1% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.323e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1366 ave        1366 max        1366 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14016 ave       14016 max       14016 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28032
+Ave neighs/atom = 219
+Neighbor list builds = 0
+Dangerous builds = 0
+variable raw equal pzz
+variable szz_xp equal ${raw}
+variable szz_xp equal -29444.0599849593
+
+change_box all x final 0 ${lxm} remap units box
+change_box all x final 0 10.0567917238568 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+run 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+Extrapolation control is off
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5089      4583.314       69085.254     -21128.246     -2.7419357e-06  1.3179829e-05  1.0119725e-11  10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.844e-06 on 2 procs for 0 steps with 128 atoms
+
+216.9% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.844e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14016 ave       14016 max       14016 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28032
+Ave neighs/atom = 219
+Neighbor list builds = 0
+Dangerous builds = 0
+variable raw equal pzz
+variable szz_xm equal ${raw}
+variable szz_xm equal -21128.2459128276
+
+change_box all x final 0 ${lx0} remap units box
+change_box all x final 0 10.0567917238568 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+variable C13 equal -(${szz_xp}-${szz_xm})/(2*${d})*${b}
+variable C13 equal -(-29444.0599849593-${szz_xm})/(2*${d})*${b}
+variable C13 equal -(-29444.0599849593--21128.2459128276)/(2*${d})*${b}
+variable C13 equal -(-29444.0599849593--21128.2459128276)/(2*0.002)*${b}
+variable C13 equal -(-29444.0599849593--21128.2459128276)/(2*0.002)*0.0001
+
+# -----------------------------------------------------------------------
+# C23: strain yy, read pzz
+# -----------------------------------------------------------------------
+change_box all y final 0 ${lyp} remap units box
+change_box all y final 0 12.8705162535515 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.870516 8.8623108) with tilt (0 0 0)
+run 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+Extrapolation control is off
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.6768     -4249.1858      48299.043     -28148.359     -2.1317557e-06  9.0142741e-06  2.713665e-11   10.056792      12.870516      8.8623108      1147.103     
+Loop time of 1.466e-06 on 2 procs for 0 steps with 128 atoms
+
+170.5% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.466e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        13760 ave       13760 max       13760 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 27520
+Ave neighs/atom = 215
+Neighbor list builds = 0
+Dangerous builds = 0
+variable raw equal pzz
+variable szz_yp equal ${raw}
+variable szz_yp equal -28148.3592726488
+
+change_box all y final 0 ${lym} remap units box
+change_box all y final 0 12.8191369471501 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+run 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+Extrapolation control is off
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5089      4583.314       69085.254     -21128.246     -2.7419664e-06  1.3179738e-05 -2.0862203e-11  10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.3965e-06 on 2 procs for 0 steps with 128 atoms
+
+179.0% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.396e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14016 ave       14016 max       14016 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28032
+Ave neighs/atom = 219
+Neighbor list builds = 0
+Dangerous builds = 0
+variable raw equal pzz
+variable szz_ym equal ${raw}
+variable szz_ym equal -21128.2459128275
+
+change_box all y final 0 ${ly0} remap units box
+change_box all y final 0 12.8191369471501 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+variable C23 equal -(${szz_yp}-${szz_ym})/(2*${d})*${b}
+variable C23 equal -(-28148.3592726488-${szz_ym})/(2*${d})*${b}
+variable C23 equal -(-28148.3592726488--21128.2459128275)/(2*${d})*${b}
+variable C23 equal -(-28148.3592726488--21128.2459128275)/(2*0.002)*${b}
+variable C23 equal -(-28148.3592726488--21128.2459128275)/(2*0.002)*0.0001
+
+# -----------------------------------------------------------------------
+# C44: shear yz, read pyz
+# -----------------------------------------------------------------------
+variable yzp equal  ${d}*${lz0}
+variable yzp equal  0.002*${lz0}
+variable yzp equal  0.002*8.8623108227041
+variable yzm equal -${d}*${lz0}
+variable yzm equal -0.002*${lz0}
+variable yzm equal -0.002*8.8623108227041
+
+change_box all yz final ${yzp} remap units box
+change_box all yz final 0.0177246216454082 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0.017724622)
+run 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+Extrapolation control is off
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5072      4533.0087      69040.482     -21135.948     -4.9991586e-06  1.1880872e-05 -2399.3311      10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.4665e-06 on 2 procs for 0 steps with 128 atoms
+
+204.6% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.467e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14048 ave       14048 max       14048 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28096
+Ave neighs/atom = 219.5
+Neighbor list builds = 0
+Dangerous builds = 0
+variable raw equal pyz
+variable syz_p equal ${raw}
+variable syz_p equal -2399.33113968275
+
+change_box all yz final ${yzm} remap units box
+change_box all yz final -0.0177246216454082 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 -0.017724622)
+run 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+Extrapolation control is off
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5072      4533.0087      69040.482     -21135.948      1.7082579e-07  1.1500011e-05  2399.3311      10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.5925e-06 on 2 procs for 0 steps with 128 atoms
+
+188.4% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.592e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14048 ave       14048 max       14048 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28096
+Ave neighs/atom = 219.5
+Neighbor list builds = 0
+Dangerous builds = 0
+variable raw equal pyz
+variable syz_m equal ${raw}
+variable syz_m equal 2399.33113968291
+
+change_box all yz final 0.0 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+variable C44 equal -(${syz_p}-${syz_m})/(2*${d})*${b}*0.5
+variable C44 equal -(-2399.33113968275-${syz_m})/(2*${d})*${b}*0.5
+variable C44 equal -(-2399.33113968275-2399.33113968291)/(2*${d})*${b}*0.5
+variable C44 equal -(-2399.33113968275-2399.33113968291)/(2*0.002)*${b}*0.5
+variable C44 equal -(-2399.33113968275-2399.33113968291)/(2*0.002)*0.0001*0.5
+
+# -----------------------------------------------------------------------
+# C55: shear xz, read pxz
+# -----------------------------------------------------------------------
+variable xzp equal  ${d}*${lz0}
+variable xzp equal  0.002*${lz0}
+variable xzp equal  0.002*8.8623108227041
+variable xzm equal -${d}*${lz0}
+variable xzm equal -0.002*${lz0}
+variable xzm equal -0.002*8.8623108227041
+
+change_box all xz final ${xzp} remap units box
+change_box all xz final 0.0177246216454082 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0.017724622 0)
+run 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+Extrapolation control is off
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5069      4508.1294      69047.414     -21157.527     -2.4165355e-06 -2752.748       1.3207285e-07  10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.5135e-06 on 2 procs for 0 steps with 128 atoms
+
+198.2% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.513e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14016 ave       14016 max       14016 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28032
+Ave neighs/atom = 219
+Neighbor list builds = 0
+Dangerous builds = 0
+variable raw equal pxz
+variable sxz_p equal ${raw}
+variable sxz_p equal -2752.74797324271
+
+change_box all xz final ${xzm} remap units box
+change_box all xz final -0.0177246216454082 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 -0.017724622 0)
+run 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+Extrapolation control is off
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5069      4508.1294      69047.414     -21157.527     -2.4164788e-06  2752.748      -1.3175727e-07  10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.704e-06 on 2 procs for 0 steps with 128 atoms
+
+205.4% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.704e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14016 ave       14016 max       14016 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28032
+Ave neighs/atom = 219
+Neighbor list builds = 0
+Dangerous builds = 0
+variable raw equal pxz
+variable sxz_m equal ${raw}
+variable sxz_m equal 2752.7479965812
+
+change_box all xz final 0.0 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+variable C55 equal -(${sxz_p}-${sxz_m})/(2*${d})*${b}*0.5
+variable C55 equal -(-2752.74797324271-${sxz_m})/(2*${d})*${b}*0.5
+variable C55 equal -(-2752.74797324271-2752.7479965812)/(2*${d})*${b}*0.5
+variable C55 equal -(-2752.74797324271-2752.7479965812)/(2*0.002)*${b}*0.5
+variable C55 equal -(-2752.74797324271-2752.7479965812)/(2*0.002)*0.0001*0.5
+
+# -----------------------------------------------------------------------
+# C66: shear xy, read pxy
+# -----------------------------------------------------------------------
+variable xyp equal  ${d}*${ly0}
+variable xyp equal  0.002*${ly0}
+variable xyp equal  0.002*12.8191369471501
+variable xym equal -${d}*${ly0}
+variable xym equal -0.002*${ly0}
+variable xym equal -0.002*12.8191369471501
+
+change_box all xy final ${xyp} remap units box
+change_box all xy final 0.0256382738943002 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0.025638274 0 0)
+run 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+Extrapolation control is off
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5067      4481.4751      69029.467     -21155.349     -3114.4888      1.1647085e-05 -1.584319e-06   10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.425e-06 on 2 procs for 0 steps with 128 atoms
+
+210.5% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.425e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14048 ave       14048 max       14048 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28096
+Ave neighs/atom = 219.5
+Neighbor list builds = 0
+Dangerous builds = 0
+variable raw equal pxy
+variable sxy_p equal ${raw}
+variable sxy_p equal -3114.4887996973
+
+change_box all xy final ${xym} remap units box
+change_box all xy final -0.0256382738943002 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (-0.025638274 0 0)
+run 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (../verlet.cpp:60)
+Extrapolation control is off
+Per MPI rank memory allocation (min/avg/max) = 3.126 | 3.126 | 3.126 Mbytes
+   Step         PotEng          Pxx            Pyy            Pzz            Pxy            Pxz            Pyz             Lx             Ly             Lz           Volume    
+        17  -1096.5067      4481.4751      69029.467     -21155.349      3114.4888      1.1647215e-05  1.5845804e-06  10.056792      12.819137      8.8623108      1142.5237    
+Loop time of 1.291e-06 on 2 procs for 0 steps with 128 atoms
+
+193.6% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.291e-06  |            |       |100.00
+
+Nlocal:             64 ave          64 max          64 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:           1402 ave        1402 max        1402 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+FullNghs:        14048 ave       14048 max       14048 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 28096
+Ave neighs/atom = 219.5
+Neighbor list builds = 0
+Dangerous builds = 0
+variable raw equal pxy
+variable sxy_m equal ${raw}
+variable sxy_m equal 3114.48879486065
+
+change_box all xy final 0.0 remap units box
+Changing box ...
+  triclinic box = (0 0 0) to (10.056792 12.819137 8.8623108) with tilt (0 0 0)
+variable C66 equal -(${sxy_p}-${sxy_m})/(2*${d})*${b}*0.5
+variable C66 equal -(-3114.4887996973-${sxy_m})/(2*${d})*${b}*0.5
+variable C66 equal -(-3114.4887996973-3114.48879486065)/(2*${d})*${b}*0.5
+variable C66 equal -(-3114.4887996973-3114.48879486065)/(2*0.002)*${b}*0.5
+variable C66 equal -(-3114.4887996973-3114.48879486065)/(2*0.002)*0.0001*0.5
+
+# -----------------------------------------------------------------------
+# Voigt averages
+# -----------------------------------------------------------------------
+variable Kv equal (${C11}+${C22}+${C33}+2*(${C12}+${C13}+${C23}))/9
+variable Kv equal (483.573854493943+${C22}+${C33}+2*(${C12}+${C13}+${C23}))/9
+variable Kv equal (483.573854493943+519.7989444638+${C33}+2*(${C12}+${C13}+${C23}))/9
+variable Kv equal (483.573854493943+519.7989444638+398.597021225705+2*(${C12}+${C13}+${C23}))/9
+variable Kv equal (483.573854493943+519.7989444638+398.597021225705+2*(226.663113116158+${C13}+${C23}))/9
+variable Kv equal (483.573854493943+519.7989444638+398.597021225705+2*(226.663113116158+207.895351803293+${C23}))/9
+variable Kv equal (483.573854493943+519.7989444638+398.597021225705+2*(226.663113116158+207.895351803293+175.502833995532))/9
+variable Gv equal (${C11}+${C22}+${C33}-${C12}-${C13}-${C23}+3*(${C44}+${C55}+${C66}))/15
+variable Gv equal (483.573854493943+${C22}+${C33}-${C12}-${C13}-${C23}+3*(${C44}+${C55}+${C66}))/15
+variable Gv equal (483.573854493943+519.7989444638+${C33}-${C12}-${C13}-${C23}+3*(${C44}+${C55}+${C66}))/15
+variable Gv equal (483.573854493943+519.7989444638+398.597021225705-${C12}-${C13}-${C23}+3*(${C44}+${C55}+${C66}))/15
+variable Gv equal (483.573854493943+519.7989444638+398.597021225705-226.663113116158-${C13}-${C23}+3*(${C44}+${C55}+${C66}))/15
+variable Gv equal (483.573854493943+519.7989444638+398.597021225705-226.663113116158-207.895351803293-${C23}+3*(${C44}+${C55}+${C66}))/15
+variable Gv equal (483.573854493943+519.7989444638+398.597021225705-226.663113116158-207.895351803293-175.502833995532+3*(${C44}+${C55}+${C66}))/15
+variable Gv equal (483.573854493943+519.7989444638+398.597021225705-226.663113116158-207.895351803293-175.502833995532+3*(59.9832784920708+${C55}+${C66}))/15
+variable Gv equal (483.573854493943+519.7989444638+398.597021225705-226.663113116158-207.895351803293-175.502833995532+3*(59.9832784920708+68.8186996227989+${C66}))/15
+variable Gv equal (483.573854493943+519.7989444638+398.597021225705-226.663113116158-207.895351803293-175.502833995532+3*(59.9832784920708+68.8186996227989+77.8622199319744))/15
+
+# -----------------------------------------------------------------------
+# Output
+# -----------------------------------------------------------------------
+print "==========================================" file ${outfile}
+print "==========================================" file Fe3C_mp-510623_222_fixed_min_elastic.out
+==========================================
+print " Elastic constants (GPa) - Fe3C MTP"      append ${outfile}
+print " Elastic constants (GPa) - Fe3C MTP"      append Fe3C_mp-510623_222_fixed_min_elastic.out
+ Elastic constants (GPa) - Fe3C MTP
+print "==========================================" append ${outfile}
+print "==========================================" append Fe3C_mp-510623_222_fixed_min_elastic.out
+==========================================
+print "C11 = ${C11}"                              append ${outfile}
+print "C11 = ${C11}"                              append Fe3C_mp-510623_222_fixed_min_elastic.out
+C11 = 483.573854493943
+print "C22 = ${C22}"                              append ${outfile}
+print "C22 = ${C22}"                              append Fe3C_mp-510623_222_fixed_min_elastic.out
+C22 = 519.7989444638
+print "C33 = ${C33}"                              append ${outfile}
+print "C33 = ${C33}"                              append Fe3C_mp-510623_222_fixed_min_elastic.out
+C33 = 398.597021225705
+print "C12 = ${C12}"                              append ${outfile}
+print "C12 = ${C12}"                              append Fe3C_mp-510623_222_fixed_min_elastic.out
+C12 = 226.663113116158
+print "C13 = ${C13}"                              append ${outfile}
+print "C13 = ${C13}"                              append Fe3C_mp-510623_222_fixed_min_elastic.out
+C13 = 207.895351803293
+print "C23 = ${C23}"                              append ${outfile}
+print "C23 = ${C23}"                              append Fe3C_mp-510623_222_fixed_min_elastic.out
+C23 = 175.502833995532
+print "C44 = ${C44}"                              append ${outfile}
+print "C44 = ${C44}"                              append Fe3C_mp-510623_222_fixed_min_elastic.out
+C44 = 59.9832784920708
+print "C55 = ${C55}"                              append ${outfile}
+print "C55 = ${C55}"                              append Fe3C_mp-510623_222_fixed_min_elastic.out
+C55 = 68.8186996227989
+print "C66 = ${C66}"                              append ${outfile}
+print "C66 = ${C66}"                              append Fe3C_mp-510623_222_fixed_min_elastic.out
+C66 = 77.8622199319744
+print "------------------------------------------" append ${outfile}
+print "------------------------------------------" append Fe3C_mp-510623_222_fixed_min_elastic.out
+------------------------------------------
+print "K_Voigt = ${Kv} GPa"                      append ${outfile}
+print "K_Voigt = ${Kv} GPa"                      append Fe3C_mp-510623_222_fixed_min_elastic.out
+K_Voigt = 291.34360200149 GPa
+print "G_Voigt = ${Gv} GPa"                      append ${outfile}
+print "G_Voigt = ${Gv} GPa"                      append Fe3C_mp-510623_222_fixed_min_elastic.out
+G_Voigt = 94.1267410272665 GPa
+print "==========================================" append ${outfile}
+print "==========================================" append Fe3C_mp-510623_222_fixed_min_elastic.out
+==========================================
+Total wall time: 0:00:03
